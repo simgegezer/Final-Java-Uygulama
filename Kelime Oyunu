@@ -1,0 +1,72 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+
+public class KelimeBul {
+
+    private static boolean devam = false;
+    public static void main(String[] args) throws IOException {
+        while (true) {
+            boolean devam = false;
+            Scanner kullanıcı = new Scanner(System.in);
+
+            System.out.println("Kelimenizi girip yanınızdaki arkadaşınıza verin :)");
+            String kelime = kullanıcı.nextLine();
+            int i, tahmin = 0, anahtar = 0, dogru = 0;
+            String[] bulunan = new String[kelime.length()];
+
+            System.out.println("Kelimeyi bulmak için 3 hakkınız var.");
+            BufferedReader klavye = new BufferedReader(new InputStreamReader(System.in));
+
+            for (i = 0; i < kelime.length(); i++) {
+                bulunan[i] = " _ ";
+            }
+
+            finish:
+            while (tahmin <= 3) {
+                System.out.println("Bir harf giriniz (Kalan hakkınız: " + (3 - tahmin) + "): ");
+                String harf = klavye.readLine();
+                tahmin++;
+                for (i = 0; i < kelime.length(); i++) {
+                    if (kelime.charAt(i) == harf.charAt(0)) {
+                        bulunan[i] = harf + " ";
+                        anahtar = 1;
+                        dogru++;
+                        if (dogru == kelime.length()) {
+                            System.out.println("kelime \n" + kelime + "   *****TEBRİKLER***** \n");
+                            break finish;
+
+                        }
+
+                    }
+                }
+                if (anahtar == 1) {
+                    anahtar = 0;
+                    tahmin--;
+                }
+                for (i = 0; i < kelime.length(); i++) {
+                    System.out.print(bulunan[i]);
+                }
+                System.out.println();
+            }
+            if (dogru != kelime.length()) {
+                System.out.println("Yanlış yanıt... Kelime: " + kelime);
+            }
+            System.out.println("Devam Etmek İster Misiniz? (' evet' / 'hayır')");
+
+            String cevap = kullanıcı.nextLine();
+            if(cevap.equals("evet")){
+                devam = true;
+            }
+            else if(cevap == "hayır"){
+                devam = false;
+                break;
+            }
+            else{
+                System.out.println("Tanımsız kelime girişi yaptınız");
+                break;
+            }
+        }
+    }
+}
