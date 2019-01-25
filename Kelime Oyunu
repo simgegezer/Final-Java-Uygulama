@@ -48,7 +48,6 @@ public class KelimeBul {
                 for (i = 0; i < kelime.length(); i++) {
                     System.out.print(bulunan[i]);
                 }
-                System.out.println();
             }
             if (dogru != kelime.length()) {
                 System.out.println("Yanlış yanıt... Kelime: " + kelime);
